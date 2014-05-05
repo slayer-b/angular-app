@@ -1,0 +1,18 @@
+<table ng-table="tableParams" class="table"
+       template-pagination="../partials/table-pager.html">
+    <tr ng-repeat="item in $data">
+        <td data-title="'Name'">{{item.name}}</td>
+        <td data-title="'Age'">{{item.age}}</td>
+        <td data-title="'Money'">{{item.money}}</td>
+        <td data-title="'Img'">
+            <img ng-src="../images/{{item.img}}">
+        </td>
+        <td data-title="'Options'">
+            <a href="#/items/{{item.id}}">
+                <img src="../images/options.jpg" title="edit" class="btn btn-default">
+            </a>
+            <img src="../images/kill.gif" title="delete" class="btn btn-default"
+                 ng-click="my.delete(item.id)">
+        </td>
+    </tr>
+</table>

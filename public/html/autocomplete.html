@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../lib/angular-1.1.5/angular.min.js"></script>
+    <script src="../javascripts/autocomplete.js"></script>
+    <link href="../stylesheets/autocomplete.css" rel="stylesheet"/>
+</head>
+<body ng-app="autocomplete">
+
+<div style="width: 200px" ng-mouseenter="showHint()" ng-mouseleave="hideHint()">
+    Hint me
+    <div hint class="my-hint">
+        Hint
+    </div>
+</div>
+
+<auto-complete>
+    <input type="text" value="hello" ng-mouseenter="menu.show()" ng-mouseleave="menu.hide()"/>
+    <div auto-complete-menu class="my-menu">
+        <div class="my-header">Menu header</div>
+        <ul class="my-items">
+            <li ng-repeat="item in items" ng-mouseenter="showHint()" ng-mouseleave="hideHint()">
+                {{ item.value }}
+                <div hint class="my-hint">
+                    Hint for - ({{ item.value }})
+                </div>
+            </li>
+        </ul>
+    </div>
+</auto-complete>
+
+<!--<div id="my-id"></div>-->
+<!--<div ng-controller="AutocompleteCtrl">-->
+    <!--<ul ng-repeat="item in states">-->
+        <!--<li>-->
+            <!--<span ng-mouseenter="item.visible = true" ng-mouseleave="item.visible = false">-->
+                <!--{{item.value}} - {{ item.visible }}-->
+            <!--</span>-->
+            <!--<div class="hint" ng-show="item.visible">Hint</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
+</body>
+</html>

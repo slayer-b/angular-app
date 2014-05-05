@@ -1,0 +1,27 @@
+<div>
+    o: {{orderProp}}; q: {{query}}
+</div>
+
+<div>
+    Search+: <input ng-model="query" ng-value="my"/>
+</div>
+
+<div>
+    Sort by:
+    <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+        <option value="-age">Oldest</option>
+    </select>
+</div>
+
+<div>
+    <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+            {{phone.b | checkmark}} - {{phone.name}}
+            <p>{{phone.snippet}}</p>
+
+            <p><a href="#/phones/{{phone.id}}">{{phone.name}}</a></p>
+        </li>
+    </ul>
+</div>

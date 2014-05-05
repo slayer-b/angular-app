@@ -1,0 +1,29 @@
+.menu {
+    position: absolute;
+    visibility: hidden;
+    width: 200px;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.my-menu {
+    background-color: lightcyan;
+}
+
+.my-items {
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.my-hint {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+    visibility: hidden;
+}
+
+.my-header {
+    background-color: lightgray;
+}

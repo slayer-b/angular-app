@@ -1,0 +1,110 @@
+.top {
+    background-color: lightcoral;
+    height: 100px;
+    padding: 5px;
+}
+
+.search {
+    height: 70px;
+    background-color:wheat ;
+}
+
+.adv {
+    height: 90px;
+    width: 800px;
+    background-color:lime ;
+    float: left;
+}
+
+.yandex {
+    font-size: 56px;
+    float: left;
+}
+
+.search-text {
+    float: left;
+    display: inline-block;
+}
+
+.search-text > input {
+    width: 600px;
+    height: 25px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.photo {
+    font-size: 26px;
+    float: left;
+    height: 207px;
+    background-color: blanchedalmond;
+}
+
+.right-photo {
+    width: 800px;
+    display: inline-block;
+}
+
+.bottom {
+}
+
+.news {
+    height: 130px;
+    background-color: lightseagreen;
+}
+
+.misc {
+    /*height: 67px;*/
+    background-color: thistle;
+    /*width: 230px;*/
+}
+
+.news-block {
+    background-color: aqua;
+    width: 150px;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    display: inline-block;
+}
+
+.wallpaper {
+    width: 100px;
+    height: 75px;
+    display: inline-block;
+    background-color: bisque;
+    padding: 2px;
+    margin: 2px;
+}
+
+.r {
+    height: 10px;
+    width: 100px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.r1 {
+    background: -webkit-linear-gradient(left, red, orange);
+}
+
+.r2 {
+    background: -webkit-linear-gradient(left, orange, yellow);
+}
+
+.r3 {
+    background: -webkit-linear-gradient(left, yellow, green);
+}
+
+.r4 {
+    background: -webkit-linear-gradient(left, green, lightblue);
+}
+
+.r5 {
+    background: -webkit-linear-gradient(left, lightblue, blue);
+}
+
+.r6 {
+    background: -webkit-linear-gradient(left, blue, violet);
+}

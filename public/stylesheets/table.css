@@ -1,0 +1,21 @@
+body {
+    padding: 10px !important;
+}
+
+.ng-table tr.emphasis td {
+    background-color: #DDD;
+    font-weight: bold;
+}
+
+.my-dialog {
+    position: absolute;
+    border: 3px solid #ececec;
+    width: 150px;
+    margin-left: -75px;
+    left: 50%;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}

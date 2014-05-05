@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../lib/angular-1.3.0-beta.5/angular.min.js"></script>
+    <script src="../lib/ng-table/ng-table.min.js"></script>
+    <script src="../javascripts/table-universal.js"></script>
+    <link href="../stylesheets/table.css" rel="stylesheet"/>
+    <link href="../b-3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body ng-app="my-table" ng-controller="DemoCtrl">
+    <h1>v1.15</h1>
+    <table ng-table="tableParams" class="table">
+        <thead>
+        <tr>
+            <th ng-repeat="header in headers" class="sortable" ng-class="{
+                    'sort-asc': tableParams.isSortBy({{header}}, 'asc'),
+                    'sort-desc': tableParams.isSortBy({{header}}, 'desc')
+                  }"
+                ng-click="
+                    a = {};
+                    a[header] = tableParams.isSortBy(header, 'asc') ? 'desc' : 'asc';
+                    tableParams.sorting(a);">
+                {{header}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in $data" ng-class="{ 'emphasis': user.money > 500 }">
+                <td ng-repeat="header in headers">
+                    {{user[header]}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

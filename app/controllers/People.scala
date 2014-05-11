@@ -8,6 +8,7 @@ import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.postfixOps
 import scala.concurrent.Future
+import model.UserData
 
 object People extends Controller {
   var items = Map[Int, JsValue]()
@@ -58,13 +59,4 @@ object People extends Controller {
           "img" -> "favicon.png",
           "detail" -> s"Some detail #$id"
         )
-
-  case class UserData(
-    id: Int,
-    name: String,
-    age: Int,
-    money: Int,
-    img: String,
-    detail: String
-  )
 }

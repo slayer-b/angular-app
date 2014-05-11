@@ -3,16 +3,17 @@
 # ~~~~
 
 # Home page
-GET        /                       controllers.Application.index
-GET        /play                   controllers.Application.index2
-GET        /phones                 controllers.Application.phones
-GET        /phones/:id.json        controllers.Application.phone(id: Long)
-GET        /items/list             controllers.People.list(count: Int ?= 3, page: Int ?= 0)
-GET        /items/:id              controllers.People.detail(id: Int)
-POST       /items/save             controllers.People.save
-GET        /images/list             controllers.Images.list(count: Int ?= 3, page: Int ?= 0)
-GET        /images/:id              controllers.Images.detail(id: Int)
-POST       /images/save             controllers.Images.save
+GET         /                       controllers.Application.index
+GET         /play                   controllers.Application.index2
+GET         /phones                 controllers.Application.phones
+GET         /phones/:id.json        controllers.Application.phone(id: Long)
+GET         /items/list             controllers.People.list(count: Int ?= 3, page: Int ?= 0)
+GET         /items/:id              controllers.People.detail(id: Int)
+POST        /items/save             controllers.People.save
+GET         /images/list            controllers.Images.list(count: Int ?= 3, page: Int ?= 0)
+GET         /images/:id             controllers.Images.detail(id: Int)
+POST        /images/save            controllers.Images.save
+GET         /init                   controllers.Init.init
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file           controllers.Assets.at(path="/public", file)
+GET         /assets/*file           controllers.Assets.at(path="/public", file)

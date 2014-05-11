@@ -1,10 +1,8 @@
 <h2>{{my.type}}</h2>
 <div>Name: <input type="text" ng-model="item.name"></div>
-<div>Age: <input type="number" ng-model="item.age"></div>
-<div>Money: <input type="number" ng-model="item.money"></div>
-<div>Details: <input type="text" ng-model="item.detail"></div>
+<div>Category: <input type="text" ng-model="item.category"></div>
 <div>Img
-    <img ng-src="../images/{{item.img}}">
+    <img ng-src="../images/{{item.url}}">
 </div>
 <div ng-hide="!loaded"><input type="button" ng-click="my.save()" value="save"></div>
 <div ng-hide="loaded" >

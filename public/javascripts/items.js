@@ -1,6 +1,6 @@
 var app = angular.module('items', ['ngTable', 'ngResource', 'ngRoute'])
-    .controller('DemoListCtrl', function($scope, $location, $resource, ngTableParams) {
-        var items = $resource("/items.json");
+    .controller('DemoListCtrl', function($scope, $location, $resource, $routeParams, ngTableParams) {
+        var items = $resource("/" + $routeParams.type + "/list");
         $scope.tableParams = new ngTableParams(
             //extend to apply default values
             angular.extend({
@@ -24,36 +24,39 @@ var app = angular.module('items', ['ngTable', 'ngResource', 'ngRoute'])
             "delete": function(id) {
                 console.log("delete #" + id);
             },
-            "edit": function(id) {
-                console.log("edit #" + id);
-            }
+            "type": $routeParams.type
         };
     })
     .controller('DemoDetailCtrl', function($scope, $resource, $routeParams) {
-        var item = $resource("/item.json");
-        item.get($routeParams, function(data) {
+        var item = $resource("/" + $routeParams.type + "/:id");
+        item.get({"id": $routeParams.id}, function(data) {
             $scope.item = data.result;
         });
-        var itemSave = $resource("/item-save", {}, {
+        var itemSave = $resource("/" + $routeParams.type +"/save", {}, {
             "save": {method: "POST"}
         });
         $scope.loaded = true;
         $scope.error = true;
-        $scope.save = function() {
-            $scope.loaded = false;
-            itemSave.save($scope.item, function() {
-                $scope.loaded = true;
-            }, function(error) {
-                $scope.loaded = true;
-                $scope.error = false;
-            });
-        }
+        $scope.my = {
+            "type": $routeParams.type,
+            "save": function() {
+                $scope.loaded = false;
+                itemSave.save($scope.item, function() {
+                    $scope.loaded = true;
+                }, function(error) {
+                    $scope.loaded = true;
+                    $scope.error = false;
+                });
+            }
+        };
     })
-    .config(function($routeProvider, $locationProvider) {
+    .config(function($routeProvider) {
         $routeProvider.
-            when('/items', {templateUrl: '../partials/item-list.html', controller: 'DemoListCtrl'}).
-            when('/items/:id', {templateUrl: '../partials/item-detail.html', controller: 'DemoDetailCtrl'}).
-            otherwise({redirectTo: '/items'});
+            when('/items/:type/list', {templateUrl: '../partials/item-list.html', controller: 'DemoListCtrl'}).
+            when('/items/:type/:id', {templateUrl: '../partials/item-detail.html', controller: 'DemoDetailCtrl'}).
+            when('/images/:type/list', {templateUrl: '../partials/image-list.html', controller: 'DemoListCtrl'}).
+            when('/images/:type/:id', {templateUrl: '../partials/image-detail.html', controller: 'DemoDetailCtrl'}).
+            otherwise({redirectTo: '/items/list'});
         //remove '#' sign from url
 //        $locationProvider.html5Mode(true);
     });

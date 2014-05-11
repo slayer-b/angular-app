@@ -1,4 +1,8 @@
-target/*
-.idea/*
-project/target/*
+target/**
+.idea/**
+.idea_modules/**
+project/target/**
+project/project/target/**
+**/.DS_Store
+logs/**
 

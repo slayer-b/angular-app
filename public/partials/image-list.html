@@ -3,10 +3,9 @@
        template-pagination="../partials/table-pager.html">
     <tr ng-repeat="item in $data">
         <td data-title="'Name'">{{item.name}}</td>
-        <td data-title="'Age'">{{item.age}}</td>
-        <td data-title="'Money'">{{item.money}}</td>
-        <td data-title="'Img'">
-            <img ng-src="../images/{{item.img}}">
+        <td data-title="'Category'">{{item.category}}</td>
+        <td data-title="'URL'">
+            <img ng-src="../images/{{item.url}}">
         </td>
         <td data-title="'Options'">
             <a href="#/{{my.type}}/{{my.type}}/{{item.id}}">

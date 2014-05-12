@@ -1,7 +1,6 @@
 package model
 
 import scala.slick.driver.H2Driver.simple._
-import scala.slick.lifted.{ProvenShape, ForeignKeyQuery}
 
 case class UserData(
                      id: Int,

@@ -7,16 +7,17 @@ import model.{Image, Peoples}
 import play.api.mvc._
 
 object Init extends Controller {
-
+  def MyDatabase =
+    Database.forURL("jdbc:h2:mem:play", driver = "org.h2.Driver", user = "sa", password = "")
 
   // The query interface for the Suppliers table
-  val suppliers: TableQuery[Peoples] = TableQuery[Peoples]
+  val peoples: TableQuery[Peoples] = TableQuery[Peoples]
   // the query interface for the Coffees table
-  val coffees: TableQuery[Image] = TableQuery[Image]
+  val images: TableQuery[Image] = TableQuery[Image]
 
   def init() = Action {
     // Create a connection (called a "session") to an in-memory H2 database
-    Database.forURL("jdbc:h2:mem:play", driver = "org.h2.Driver", user = "sa", password = "").withSession {
+    MyDatabase.withSession {
       implicit session =>
         // Construct a SQL statement manually with an interpolated value
         try {
@@ -27,7 +28,7 @@ object Init extends Controller {
         } catch {
           case e: Exception =>
             // Create the schema by combining the DDLs
-            val ddl = suppliers.ddl ++ coffees.ddl
+            val ddl = peoples.ddl ++ images.ddl
             ddl.create
             val rez = ddl.createStatements.reduce(_ + _)
             Ok("Initialized with SQL: <br>" + rez)
@@ -35,4 +36,5 @@ object Init extends Controller {
 
     }
   }
+
 }

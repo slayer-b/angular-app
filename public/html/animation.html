@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../lib/angular-1.3.0-beta.5/angular.min.js"></script>
+    <script src="../lib/angular-1.3.0-beta.5/angular-animate.min.js"></script>
+    <script src="../javascripts/animation.js"></script>
+    <link href="../stylesheets/animation.css" rel="stylesheet"/>
+    <link href="../b-3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body ng-app="myAnimations">
+<div class="my-container">
+    <div>Press button angular: <input type="checkbox" ng-model="hideshow"></div>
+    <div class="element slide-up-hide" ng-hide="hideshow"></div>
+</div>
+<div class="my-container">
+    <div>Press button jquery: <input type="checkbox" id="check"></div>
+    <div id="box" class="element slide-up-hide"></div>
+</div>
+<div class="my-container">
+    <div>Hover:</div>
+    <div class="element slide-up"></div>
+</div>
+</body>
+</html>

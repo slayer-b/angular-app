@@ -1,7 +1,6 @@
 package controllers
 
 import scala.slick.driver.H2Driver.simple._
-import play.api.libs.json.Json
 
 // Required import for the sql interpolator
 import scala.slick.jdbc.StaticQuery.interpolation

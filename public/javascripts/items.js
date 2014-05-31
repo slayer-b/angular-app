@@ -1,6 +1,15 @@
 var app = angular.module('items', ['ngTable', 'ngResource', 'ngRoute'])
     .controller('DemoListCtrl', function($scope, $location, $resource, $routeParams, ngTableParams) {
-        var items = $resource("/" + $routeParams.type + "/list");
+        var service = $resource("", {"id": "@id"}, {
+            "delete": {
+                "method": "POST",
+                "url": "/" + $routeParams.type + "/delete/:id"
+            },
+            "list": {
+                "url": "/" + $routeParams.type + "/list"
+            }
+        });
+
         $scope.tableParams = new ngTableParams(
             //extend to apply default values
             angular.extend({
@@ -9,26 +18,34 @@ var app = angular.module('items', ['ngTable', 'ngResource', 'ngRoute'])
             }, $location.search()), {
                 getData: function($defer, params) {
                     $location.search(params.url());
-                    items.get(params.url(), function(data) {
+                    service.list(params.url(), function(data) {
                         params.total(data.total);
                         $scope.loaded = true;
                         $defer.resolve(data.result);
                     });
                 }
-            });
+        });
         $scope.my = {
             "loadPage": function(page) {
                 $scope.loaded = false;
                 $scope.tableParams.page(page.number);
             },
             "delete": function(id) {
-                console.log("delete #" + id);
+                $scope.loaded = false;
+                service.delete({id: id}, function(data) {
+                    $scope.loaded = true;
+                });
+
+                $scope.loaded = false;
+                //reload page after this
+                console.log($scope.page);
+//                $scope.tableParams.page($scope.page.number)
             },
             "type": $routeParams.type
         };
     })
     .controller('DemoDetailCtrl', function($scope, $resource, $routeParams) {
-        var item = $resource("/" + $routeParams.type + "/:id");
+        var item = $resource("/" + $routeParams.type + "/detail/:id");
         item.get({"id": $routeParams.id}, function(data) {
             $scope.item = data.result;
         });

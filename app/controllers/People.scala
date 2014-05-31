@@ -10,7 +10,6 @@ import scala.language.postfixOps
 import scala.concurrent.Future
 
 import scala.slick.driver.H2Driver.simple._
-import scala.slick.driver.H2Driver.simple.{Session => SlickSession}
 
 import model._
 
@@ -22,13 +21,11 @@ object People extends Controller {
     Json.fromJson[UserData](request.body).map { data =>
       Init.MyDatabase.withSession {
         implicit session =>
-          val query = for {
+          val selectById = for {
             p <- Init.peoples if p.id === data.id
           } yield p
 
-          val p = query.run
-          if (p.isEmpty) Init.peoples.insert(data)
-          else Init.peoples.update(data)
+          selectById.update(data)
       }
 
       Promise.timeout(Ok(Json.obj(
@@ -38,8 +35,22 @@ object People extends Controller {
       )), 1 second)
     }.recoverTotal {
       e => Future(
-        BadRequest("Detected error:"+ JsError.toFlatJson(e))
+        BadRequest("Detected error:" + JsError.toFlatJson(e))
       )
+    }
+  }
+
+  def delete(id: Int) = Action.async {
+    Init.MyDatabase.withSession { implicit session =>
+      val query = for {
+        p <- Init.peoples if p.id === id
+      } yield p
+      query.delete
+
+      Promise.timeout(Ok(Json.obj(
+        "result" -> "Succeed",
+        "error" -> false
+      )), 1 second)
     }
   }
 
@@ -47,10 +58,14 @@ object People extends Controller {
     Init.MyDatabase.withSession {
       implicit session =>
       val first = (page - 1) * count
-      val last = page * count - 1
-      val rez = JsArray(
-        (first to last).map(generate)
-      )
+
+      val query = for (
+        p <- Init.peoples
+      ) yield p
+      val list = query.drop(first).take(count).list()
+
+      val rez = list.map(o => Json.toJson(o))
+
       Promise.timeout(Ok(Json.obj(
         "total" -> 100,
         "result" -> rez
@@ -59,37 +74,26 @@ object People extends Controller {
   }
 
   def detail(id: Int) = Action.async {
-    Init.MyDatabase.withSession { implicit session =>
-
+    Init.MyDatabase.withSession {
+      implicit session =>
         val query = for {
           p <- Init.peoples if p.id === id
         } yield p
 
-        val p = query.run
-        val data =
-          if (p.isEmpty) generate(id)
-          else Json.toJson(p(0))
-
         Promise.timeout(Ok(Json.obj(
-          "result" -> data
+          "result" -> query.first()
         )), 1 second)
     }
   }
 
-  def generate(id: Int)(implicit session: SlickSession) = {
-    val query = for {
-      p <- Init.peoples if p.id === id
-    } yield p
+  def createOne(id: Int) =
+    UserData(
+      id,
+      s"Some name #$id",
+      id,
+      id * 10,
+      "favicon.png",
+      s"Some detail #$id"
+    )
 
-    val p = query.run
-
-    if (p.isEmpty) Json.obj(
-      "id" -> id,
-      "name" -> s"Some name #$id",
-      "age" -> id,
-      "money" -> id * 10,
-      "img" -> "favicon.png",
-      "detail" -> s"Some detail #$id")
-    else Json.toJson(p(0))
-  }
 }

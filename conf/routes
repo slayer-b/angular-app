@@ -8,7 +8,8 @@ GET         /play                   controllers.Application.index2
 GET         /phones                 controllers.Application.phones
 GET         /phones/:id.json        controllers.Application.phone(id: Long)
 GET         /items/list             controllers.People.list(count: Int ?= 3, page: Int ?= 0)
-GET         /items/:id              controllers.People.detail(id: Int)
+GET         /items/detail/:id       controllers.People.detail(id: Int)
+POST        /items/delete/:id       controllers.People.delete(id: Int)
 POST        /items/save             controllers.People.save
 GET         /images/list            controllers.Images.list(count: Int ?= 3, page: Int ?= 0)
 GET         /images/:id             controllers.Images.detail(id: Int)

@@ -1,10 +1,13 @@
 package controllers
 
 import scala.slick.driver.H2Driver.simple._
+import play.api.libs.json.Json
+
 // Required import for the sql interpolator
 import scala.slick.jdbc.StaticQuery.interpolation
 import model.{Image, Peoples}
 import play.api.mvc._
+import scala.slick.driver.H2Driver.simple.{Session => SlickSession}
 
 object Init extends Controller {
   def MyDatabase =
@@ -21,8 +24,8 @@ object Init extends Controller {
       implicit session =>
         // Construct a SQL statement manually with an interpolated value
         try {
-          val plainQuery = sql"select 1 from IMAGES".as[String]
-          plainQuery.list()
+          val plainQuery = sql"select count(*) from IMAGES".as[Int]
+          plainQuery.first()
 
           Ok("Already initialized")
         } catch {
@@ -31,6 +34,11 @@ object Init extends Controller {
             val ddl = peoples.ddl ++ images.ddl
             ddl.create
             val rez = ddl.createStatements.reduce(_ + _)
+            // Insert data
+            (0 to 100).foreach { i =>
+              peoples.insert(People.createOne(i))
+            }
+
             Ok("Initialized with SQL: <br>" + rez)
         }
 

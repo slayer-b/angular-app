@@ -10,12 +10,12 @@ $(document).ready(function() {
             el.addClass("ng-hide");
             setTimeout(function() {
                 el.removeClass("ng-hide-add-active");
-                el.addClass("ng-hide-remove-active");
-            }, 5000);
+            }, 1000);
         } else {
             el.removeClass("ng-hide");
-            el.removeClass("ng-hide-remove-active");
+            el.addClass("ng-hide-remove-active");
             setTimeout(function() {
+                el.removeClass("ng-hide-remove-active");
             }, 1);
         }
     });

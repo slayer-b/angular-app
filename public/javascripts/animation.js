@@ -1,4 +1,4 @@
-angular.module("myAnimations", ["ngAnimate"]);
+angular.module("myAnimations", []);
 
 $(document).ready(function() {
     var hide;

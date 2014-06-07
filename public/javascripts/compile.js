@@ -6,21 +6,23 @@ angular.module("my-compile", [])
             }
         };
 })
-    .controller("MyCtrl", function($scope, $timeout, MyService) {
+    .controller("MyCtrl", function($scope, $timeout, MyService, $interval) {
         $scope.msg = "Hi, you";
+        var count = 0;
+        $interval(function() {
+            count += 1;
+            $scope.msg = count;
+        }, 1000);
         $timeout(function() {
-            $scope.msg = "Its not me";
-        }, 2000);
+            $("#my-div").html("Removed");
+        }, 5000);
         var html = "<div>{{msg}}</div>";
         //create an angular element. (this is still our "view")
-        var el = angular.element(html),
-
+        var el = angular.element(html);
         //compile the view into a function.
-        compiled = MyService.compile(el);
-
+        var compiled = MyService.compile(el);
         //append our view to the element of the directive.
         $("#my-div").append(el);
-
         //bind our view to the scope!
         //(try commenting out this line to see what happens!)
         compiled($scope);

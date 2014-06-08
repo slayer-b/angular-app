@@ -13,24 +13,28 @@ angular.module("my-compile", [])
             }
         };
 }).controller("SlidersCtrl", function($scope, $timeout, $interval, MyService) {
-        $scope.slide = false;
         var id = "#sliders";
         var html = "<div class=\"element\" ng-include=\"'/assets/html/sliders-partial.html'\"></div>";
         var i = 0;
         var next = 1;
         $interval(function() {
             i = i + 1;
-            $scope.slide = !$scope.slide;
             if (i == next) {
                 var newScope = $scope.$new();
                 newScope.i = 0;
                 newScope.number = next;
+                newScope.slide = true;
+                MyService.compile(html, id, newScope);
+                $timeout(function() {
+                    newScope.slide = false;
+                }, 100);
+                var max = i;
                 $interval(function() {
                     newScope.i += 1;
-                }, 1000);
+                    newScope.slide = !newScope.slide;
+                }, max * 1000);
                 i = 0;
                 next = 2 * next;
-                MyService.compile(html, id, newScope);
             }
         }, 1000);
 }).controller("MyCtrl", function($scope, $timeout, MyService, $interval) {

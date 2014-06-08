@@ -28,11 +28,10 @@ angular.module("my-compile", [])
                 $timeout(function() {
                     newScope.slide = false;
                 }, 100);
-                var max = i;
                 $interval(function() {
                     newScope.i += 1;
                     newScope.slide = !newScope.slide;
-                }, max * 1000);
+                }, i * 1000);
                 i = 0;
                 next = 2 * next;
             }

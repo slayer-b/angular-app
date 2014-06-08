@@ -1,0 +1,20 @@
+<style>
+    #n-{{number}} {
+        -webkit-transition: {{number}}s;
+        -moz-transition: {{number}}s;
+        -ms-transition: {{number}}s;
+        -o-transition: {{number}}s;
+        transition: {{number}}s;
+        height: 200px;
+        width:25px;
+        display: inline-block;
+        background-color: #008800;
+        margin: 3px;
+    }
+    #n-{{number}}.slide {
+        height: 15px;
+    }
+</style>
+<div>{{number}}</div>
+<div>{{i}}</div>
+<div id="n-{{number}}" class="slide-up" ng-class="{slide: slide}"></div>

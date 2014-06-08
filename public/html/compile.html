@@ -5,6 +5,7 @@
     <script src="../lib/jquery-1.9.1.min.js"></script>
     <script src="../lib/angular-1.3.0-beta.5/angular.min.js"></script>
     <script src="../javascripts/compile.js"></script>
+    <link href="../stylesheets/compile.css" rel="stylesheet">
 </head>
 <body>
 <div ng-app="my-compile">
@@ -12,6 +13,13 @@
         <div>Hello:</div>
         <div>count: {{msg}}</div>
         <div id="my-div"></div>
+    </div>
+    <div ng-controller="SlidersCtrl">
+        <div id="sliders">
+            <div style="height: 250px;display: inline-block;width: 5px;background-color: red;">
+
+            </div>
+        </div>
     </div>
 </div>
 </body>

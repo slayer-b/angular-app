@@ -1,8 +1,15 @@
 angular.module("my-compile", [])
 .factory("MyService", function($compile) {
         return {
-            compile: function(el) {
-                return $compile(el);
+            compile: function(html, id, $scope) {
+                //create an angular element. (this is still our "view")
+                var el = $(html);
+                //compile the view into a function.
+                var compiled = $compile(el);
+                //append our view to the element of the directive.
+                $(id).append(el);
+                //bind our view to the scope!
+                compiled($scope);
             }
         };
 })
@@ -17,13 +24,8 @@ angular.module("my-compile", [])
             $("#my-div").html("Removed");
         }, 5000);
         var html = "<div>{{msg}}</div>";
-        //create an angular element. (this is still our "view")
-        var el = angular.element(html);
-        //compile the view into a function.
-        var compiled = MyService.compile(el);
-        //append our view to the element of the directive.
-        $("#my-div").append(el);
-        //bind our view to the scope!
-        //(try commenting out this line to see what happens!)
-        compiled($scope);
+        MyService.compile(html, "#my-div", $scope);
+
+        var html2 = "<div ng-include=\"'/assets/html/partial.html'\"></div>";
+        MyService.compile(html2,"#my-div", $scope);
     });

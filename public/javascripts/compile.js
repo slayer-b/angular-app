@@ -21,7 +21,6 @@ angular.module("my-compile", [])
             i = i + 1;
             if (i == next) {
                 var newScope = $scope.$new();
-                newScope.i = 0;
                 newScope.number = next;
                 newScope.slide = true;
                 newScope.i = function() {

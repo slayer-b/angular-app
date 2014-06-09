@@ -9,16 +9,15 @@
 </head>
 <body>
 <div ng-app="my-compile">
-    <div ng-controller="MyCtrl">
-        <div>Hello:</div>
-        <div>count: {{msg}}</div>
-        <div id="my-div"></div>
-    </div>
     <div ng-controller="SlidersCtrl">
         <div id="sliders">
             <div style="height: 250px;display: inline-block;width: 5px;background-color: red;">
             </div>
         </div>
+    </div>
+    <div ng-controller="MyCtrl">
+        <div>count: {{msg}}</div>
+        <div id="my-div"></div>
     </div>
 </div>
 </body>

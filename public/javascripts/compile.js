@@ -24,12 +24,14 @@ angular.module("my-compile", [])
                 newScope.i = 0;
                 newScope.number = next;
                 newScope.slide = true;
+                newScope.i = function() {
+                    return newScope.number - 1 - i % newScope.number;
+                };
                 MyService.compile(html, id, newScope);
                 $timeout(function() {
                     newScope.slide = false;
-                }, 100);
+                }, 10);
                 $interval(function() {
-                    newScope.i += 1;
                     newScope.slide = !newScope.slide;
                 }, i * 1000);
                 i = 0;

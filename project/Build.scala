@@ -9,8 +9,8 @@ object ApplicationBuild extends Build {
   val appDependencies = Seq(
     // Add your project dependencies here,
     "com.typesafe.slick" %% "slick" % "2.0.0",
-    "com.h2database" % "h2" % "1.3.172"
-
+//    "com.typesafe.play" %% "play-slick" % "0.7.0-M1",
+    "com.h2database" % "h2" % "1.4.178"
   )
 
   val main = Project(appName, file(".")).enablePlugins(play.PlayScala).settings(

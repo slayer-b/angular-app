@@ -1,6 +1,7 @@
 package controllers
 
 import scala.slick.driver.H2Driver.simple._
+import play.api.Play
 
 // Required import for the sql interpolator
 import scala.slick.jdbc.StaticQuery.interpolation
@@ -9,8 +10,13 @@ import play.api.mvc._
 import scala.slick.driver.H2Driver.simple.{Session => SlickSession}
 
 object Init extends Controller {
+  //TODO: move to DBAction when it will support async
   def MyDatabase =
-    Database.forURL("jdbc:h2:mem:play", driver = "org.h2.Driver", user = "sa", password = "")
+    Database.forURL(
+      driver = Play.current.configuration.getString("db.default.driver").get,
+      url = Play.current.configuration.getString("db.default.url").get,
+      user = Play.current.configuration.getString("db.default.user").get,
+      password = Play.current.configuration.getString("db.default.password").get)
 
   // The query interface for the Suppliers table
   val peoples: TableQuery[Peoples] = TableQuery[Peoples]

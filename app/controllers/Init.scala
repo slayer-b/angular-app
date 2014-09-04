@@ -7,7 +7,6 @@ import play.api.Play
 import scala.slick.jdbc.StaticQuery.interpolation
 import model.{Image, Peoples}
 import play.api.mvc._
-import scala.slick.driver.H2Driver.simple.{Session => SlickSession}
 
 object Init extends Controller {
   //TODO: move to DBAction when it will support async
@@ -18,9 +17,7 @@ object Init extends Controller {
       user = Play.current.configuration.getString("db.default.user").get,
       password = Play.current.configuration.getString("db.default.password").get)
 
-  // The query interface for the Suppliers table
   val peoples: TableQuery[Peoples] = TableQuery[Peoples]
-  // the query interface for the Coffees table
   val images: TableQuery[Image] = TableQuery[Image]
 
   def init() = Action {

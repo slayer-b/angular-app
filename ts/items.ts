@@ -87,15 +87,6 @@ var app = angular.module('items', ['ngTable', 'ngResource', 'ngRoute'])
 //        $locationProvider.html5Mode(true);
     });
 
-
-/**
- * Use this function to manually start up angular application.
- *
- * @param element DOM element which is the root of angular application.
- * @param modules An array of modules to load into the application.
- *     Each item in the array should be the name of a predefined module or a (DI annotated)
- *     function that will be invoked by the injector as a run block.
- */
 interface ItemsScope {
     tableParams: any;
     loaded: boolean;
